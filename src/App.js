@@ -2,7 +2,9 @@ import React from 'react';
 
 import { Box, Container, makeStyles, Paper } from '@material-ui/core';
 import { AppBar,Toolbar,IconButton, Typography } from "@material-ui/core";
+import { TodoAdder } from './components/todo-adder';
 
+import TodosContainer from './components/todos-containter';
 
 const useStyles = makeStyles((theme) => ({
   root:{},
@@ -34,7 +36,11 @@ const classes = useStyles();
       </AppBar>
 
       <Container className={classes.appContainer}>
-        <Paper className={classes.wrapper} elevation={0}>dsssss
+        <Paper className={classes.wrapper} elevation={0}>
+          {/*inside this we need two component 1 add todos -"TodosAdder"*/}
+          {/*the container area to display all the todos "TodosContainer"*/}
+          <TodoAdder />
+          <TodosContainer />
         </Paper>
       </Container>
     </Box>
