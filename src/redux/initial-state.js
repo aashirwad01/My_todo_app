@@ -1,4 +1,4 @@
-const initialState = {
+const initialState = JSON.parse(window.localStorage.getItem("My-Todos")) || {
   todos:[
   { 
     id:0,

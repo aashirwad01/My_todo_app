@@ -2,6 +2,12 @@ import { ADD_TODO, DELETE_TODO, TOGGLE_COMPLETED, TOGGLE_IMPORTANT } from "./act
 import initialState from "./initial-state";
 import shortid from "shortid";
 
+
+function saveStateToBrowser(state) {
+    window.localStorage.setItem("My-Todos", JSON.stringify(state));
+}
+
+
 function reducer(state = initialState,action){
     switch (action.type) {
         case ADD_TODO:{
@@ -18,6 +24,7 @@ function reducer(state = initialState,action){
                 }
             ]
             }
+            saveStateToBrowser(newState);
             
             return newState;
         }
@@ -34,6 +41,7 @@ function reducer(state = initialState,action){
                 ...state,
                 todos: newTodos,
             }
+            saveStateToBrowser(newState);
             return newState;
         }
         
@@ -46,6 +54,7 @@ function reducer(state = initialState,action){
                 ...state,
                 todos: newTodos,
             }
+            saveStateToBrowser(newState);
             return newState;
         }
 
@@ -61,6 +70,7 @@ function reducer(state = initialState,action){
                 ...state,
                 todos: newTodos,
             }
+            saveStateToBrowser(newState);
             return newState;
         }
     
