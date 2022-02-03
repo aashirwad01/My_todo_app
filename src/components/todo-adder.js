@@ -1,5 +1,5 @@
 import { Button, TextField } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { ADD_TODO } from '../redux/actions';
 
@@ -7,6 +7,9 @@ import { ADD_TODO } from '../redux/actions';
 export const TodoAdder= () => {
 
     const [title,setTitle] = useState(null);
+    const titleFieldRef = useRef(null);
+
+
     const dispatch=useDispatch();
 
     function handleTextChange(e) {
@@ -15,13 +18,16 @@ export const TodoAdder= () => {
 
     function addTodoItem(params) {
         //we need to dispatch the ADD_TODO action here
-        dispatch({
-            type: ADD_TODO,
-            payload: {
-                title,
-            }
-        })
-        setTitle(null);
+        if(title){
+            dispatch({
+                type: ADD_TODO,
+                payload: {
+                    title,
+                }
+            })
+            setTitle(null);
+            titleFieldRef.current.value = "";    
+        }
 
     }
 
@@ -31,6 +37,7 @@ export const TodoAdder= () => {
       <TextField style={{
           width: 400,
       }}
+      inputRef = {titleFieldRef}
       label="Add new Todo" 
       varient="filled"
       onChange={handleTextChange}

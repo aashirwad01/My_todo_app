@@ -1,4 +1,4 @@
-import { ADD_TODO, DELETE_TODO, TOGGLE_COMPLETED } from "./actions";
+import { ADD_TODO, DELETE_TODO, TOGGLE_COMPLETED, TOGGLE_IMPORTANT } from "./actions";
 import initialState from "./initial-state";
 import shortid from "shortid";
 
@@ -41,6 +41,21 @@ function reducer(state = initialState,action){
             const {id} = action.payload;
 
             const newTodos = state.todos.filter((todo) => todo.id !== id);
+
+            const newState = {
+                ...state,
+                todos: newTodos,
+            }
+            return newState;
+        }
+
+        case TOGGLE_IMPORTANT:{
+            const newTodos = state.todos.map((todo) => {
+                if(todo.id === action.payload.id){
+                    todo.important = !todo.important;
+                }
+                return todo;
+            })
 
             const newState = {
                 ...state,

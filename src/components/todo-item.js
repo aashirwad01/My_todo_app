@@ -10,8 +10,10 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { DELETE_TODO, TOGGLE_COMPLETED } from '../redux/actions';
+import { DELETE_TODO, TOGGLE_COMPLETED, TOGGLE_IMPORTANT } from '../redux/actions';
 import DeleteIcon from '@material-ui/icons/Delete';
+import StarIcon from '@material-ui/icons/Star';
+import StarOutlineIcon from '@material-ui/icons/StarOutline';
 
 
 export default function TodoItem({id,title,completed,important}) {
@@ -30,6 +32,15 @@ export default function TodoItem({id,title,completed,important}) {
     function handleDeleteClick() {
         dispatch({
             type: DELETE_TODO,
+            payload:{
+                id,
+            },
+        })
+    }
+
+    function toggleImportant() {
+        dispatch({
+            type: TOGGLE_IMPORTANT,
             payload:{
                 id,
             },
@@ -59,6 +70,9 @@ export default function TodoItem({id,title,completed,important}) {
               </FormControlLabel>
           </FormGroup>
           <ListItemSecondaryAction>
+              <IconButton onClick={ toggleImportant }edge="end">
+                  {important ? <StarIcon /> : <StarOutlineIcon />}
+              </IconButton>
               <IconButton onClick={ handleDeleteClick } edge="end">
                   <DeleteIcon />
               </IconButton>
